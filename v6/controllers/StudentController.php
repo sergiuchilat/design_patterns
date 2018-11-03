@@ -1,21 +1,24 @@
 <?php
 class StudentController
 {
+    /*Model name (class name)*/
     private $modelName = 'Student';
+    /** @var Student **/
     private $model = null;
 
     public function __construct()
     {
+        /* Inject model in controller(dependency injection pattern)*/
         $this->model  = new $this->modelName();
     }
 
     public function actionList(){
         $viewData['studentList'] = $this->model->getList();
-        App::loadView(App::$module, App::$action, $viewData);
+        return APP::loadView(APP::$module, APP::$action, $viewData);
     }
 
     public function actionAdd(){
         $viewData['dataForAdd'] = $this->model->getDataForAdd();
-        App::loadView(App::$module, App::$action, $viewData);
+        return APP::loadView(APP::$module, APP::$action, $viewData);
     }
 }
